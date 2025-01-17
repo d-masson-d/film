@@ -1,51 +1,131 @@
-<?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/white"
     android:layout_height="match_parent"
     tools:context=".ui.FilmListFragment">
 
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:fontFamily="@font/roboto_medium"
-        android:text="Жанры"
-        android:textColor="#000000"
-        android:textSize="20sp"
+    <View
+        android:id="@+id/TopAppBar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="#0E3165"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
-
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
         android:fontFamily="@font/roboto_medium"
         android:text="Фильмы"
-        android:textColor="#000000"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/TopAppBar"
+        app:layout_constraintEnd_toEndOf="@+id/TopAppBar"
+        app:layout_constraintStart_toStartOf="@+id/TopAppBar"
+        app:layout_constraintTop_toTopOf="@+id/TopAppBar" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="0dp"
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:indeterminateTint="#FFC967"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintTop_toBottomOf="@+id/TopAppBar" />
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/errorLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TopAppBar">
+
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/roboto_medium"
+                android:text="Жанры"
+                android:textColor="#000000"
+                android:textSize="20sp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/genreRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/roboto_medium"
+                android:text="Фильмы"
+                android:textColor="#000000"
+                android:textSize="20sp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/filmRecyclerView"
+                android:layout_width="wrap_content"
+                android:layout_height="556dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@color/white" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/errorLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="#232323"
+        android:padding="16dp"
+        android:visibility="gone"
+        android:layout_margin="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/errorMessageTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|center"
+            android:fontFamily="@font/roboto"
+            android:textColor="#FFFFFF"
+            android:textSize="15sp" />
+
+        <Button
+            android:id="@+id/retryButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#232323"
+            android:fontFamily="@font/roboto"
+            android:text="ПОВТОРИТЬ"
+            android:textColor="#FFC967"
+            android:layout_gravity="end"
+            android:textSize="16sp" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+

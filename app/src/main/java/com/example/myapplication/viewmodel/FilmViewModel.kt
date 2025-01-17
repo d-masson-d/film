@@ -12,7 +12,10 @@ import kotlinx.coroutines.launch
 class FilmViewModel(private val apiService: ApiService) : ViewModel() {
 
     private val _films = MutableLiveData<List<Film>>()
-    val films: LiveData<List<Film>> get() = _films
+    val films: LiveData<List<Film>> get() = _films //для фильмов
+
+    private val _error = MutableLiveData<String>()
+    val error: LiveData<String> get() = _error //для ошибок
 
     fun fetchFilms() {
         CoroutineScope(Dispatchers.IO).launch {
@@ -20,9 +23,10 @@ class FilmViewModel(private val apiService: ApiService) : ViewModel() {
                 val response = apiService.getFilms()
                 _films.postValue(response.films)
             } catch (e: Exception) {
-                // Обработка ошибок
+                _error.postValue("Ошибка подключения сети") //увед об ошибке
                 e.printStackTrace()
             }
         }
     }
 }
+

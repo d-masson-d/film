@@ -12,29 +12,38 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.myapplication.R
 import com.example.myapplication.data.Film
 
-class FilmAdapter(private val films: List<Film>) : RecyclerView.Adapter<FilmAdapter.FilmViewHolder>() {
+class FilmAdapter(private var films: List<Film>, private val onClick: (Film) -> Unit) : RecyclerView.Adapter<FilmAdapter.FilmViewHolder>() {
 
     class FilmViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val title: TextView = view.findViewById(R.id.filmCardName)
         val image: ImageView = view.findViewById(R.id.filmCardImage)
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FilmViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.film_card, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.film_card, parent, false) //к film_card
         return FilmViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: FilmViewHolder, position: Int) {
         val film = films[position]
-        holder.title.text = film.name
+        holder.title.text = film.localized_name
 
-        // Загрузка изображения с помощью Glide
+
         Glide.with(holder.itemView.context)
             .load(film.image_url)
             .apply(RequestOptions().transform(RoundedCorners(4)))
             .into(holder.image)
 
+        //обр клика
+        holder.itemView.setOnClickListener {
+            onClick(film)
+        }
     }
 
     override fun getItemCount() = films.size
+
+
+
 }
+
